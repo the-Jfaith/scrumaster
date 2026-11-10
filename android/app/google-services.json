@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1006059258449",
+    "project_id": "scrumaster-35ec2",
+    "storage_bucket": "scrumaster-35ec2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006059258449:android:43c1a7572aed2f4b7c6e70",
+        "android_client_info": {
+          "package_name": "com.example.scrumaster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdinX2u0RuJwyliuu_ys-xajX6d8ZV0A8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
