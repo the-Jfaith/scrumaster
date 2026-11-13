@@ -84,7 +84,7 @@ class _QuizScreenState extends State<QuizScreen> {
     }
   }
 
-  // 🔥 AQUÍ ESTÁ LA NUEVA LÓGICA DE EXPERIENCIA Y NIVELES
+  //LÓGICA DE EXPERIENCIA Y NIVELES
   Future<void> _guardarProgresoVictoria() async {
     var docRef = FirebaseFirestore.instance
         .collection('usuarios')
@@ -118,21 +118,21 @@ class _QuizScreenState extends State<QuizScreen> {
 
       int nuevasMonedas = monedasActuales + _aciertosALaPrimera;
 
-      // Calculamos la nueva experiencia (10 XP por acierto a la primera)
+      // Experiencia
       int xpGanada = _aciertosALaPrimera * 10;
       expActual += xpGanada;
 
-      // Lógica de Subida de Nivel (Cada 100 XP = 1 Nivel)
+      // Lógica de Subida de Nivel
       while (expActual >= 100) {
         nivelActualUsuario++;
-        expActual -= 100; // Guardamos el sobrante para la próxima barra
+        expActual -= 100;
       }
 
       await docRef.update({
         'historial_estrellas': historial,
         'monedas': nuevasMonedas,
         'nivel': nivelActualUsuario,
-        'experiencia': expActual, // Guardamos la XP actualizada
+        'experiencia': expActual,
       });
     }
   }
