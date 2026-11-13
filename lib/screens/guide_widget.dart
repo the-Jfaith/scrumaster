@@ -16,19 +16,13 @@ class GuideOverlayWidget extends StatefulWidget {
 }
 
 class _GuideOverlayWidgetState extends State<GuideOverlayWidget> {
-  // Guardamos la petición a Firebase para que no se recargue al abrir un acordeón
   late Future<DocumentSnapshot> _guiaFuture;
-
-  // Lista de controladores para manipular cada acordeón individualmente
   final List<ExpansionTileController> _controladores = [];
-
-  // Memoria para saber cuál es el que está abierto actualmente
   int? _indiceExpandido;
 
   @override
   void initState() {
     super.initState();
-    // Hacemos la petición a Firebase una sola vez al abrir la guía
     _guiaFuture = FirebaseFirestore.instance
         .collection('guias_seccion')
         .doc('seccion_${widget.seccionIndex}')
@@ -45,7 +39,7 @@ class _GuideOverlayWidgetState extends State<GuideOverlayWidget> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: FutureBuilder<DocumentSnapshot>(
-          future: _guiaFuture, // Usamos la variable guardada en initState
+          future: _guiaFuture,
           builder: (context, snapshot) {
             return Container(
               constraints: BoxConstraints(maxHeight: alturaMaxima),
@@ -106,7 +100,6 @@ class _GuideOverlayWidgetState extends State<GuideOverlayWidget> {
     String titulo = guiaData['titulo'] ?? 'Guía de la Sección';
     List<dynamic> temas = guiaData['temas'] ?? [];
 
-    // Llenamos nuestra lista de controladores dependiendo de cuántos temas llegaron de Firebase
     if (_controladores.length < temas.length) {
       for (int i = _controladores.length; i < temas.length; i++) {
         _controladores.add(ExpansionTileController());
@@ -168,23 +161,17 @@ class _GuideOverlayWidgetState extends State<GuideOverlayWidget> {
                       ),
                       margin: const EdgeInsets.only(bottom: 8),
                       child: ExpansionTile(
-                        // 2. Conectamos el controlador específico a este acordeón
                         controller: _controladores[index],
-
-                        // 3. Lógica para cerrar el anterior al abrir uno nuevo
                         onExpansionChanged: (estaExpandido) {
                           if (estaExpandido) {
-                            // Si acabas de abrir este, y ya había uno abierto diferente, ciérralo
                             if (_indiceExpandido != null &&
                                 _indiceExpandido != index) {
                               _controladores[_indiceExpandido!].collapse();
                             }
-                            // Actualiza la memoria diciendo que este es el nuevo abierto
                             setState(() {
                               _indiceExpandido = index;
                             });
                           } else {
-                            // Si lo cierras manualmente tocándolo de nuevo, borramos la memoria
                             if (_indiceExpandido == index) {
                               setState(() {
                                 _indiceExpandido = null;
@@ -246,7 +233,7 @@ class _GuideOverlayWidgetState extends State<GuideOverlayWidget> {
           elevation: 3,
         ),
         onPressed: widget
-            .onClose, // Usamos widget.onClose porque ahora es un StatefulWidget
+            .onClose,
         child: const Text(
           'ENTENDIDO',
           style: TextStyle(
