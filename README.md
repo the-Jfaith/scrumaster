@@ -1,12 +1,12 @@
 # scrumaster
 
-A new Flutter project.
+Proyecto de ingenieria de software
 
-## Getting Started
+## Juego para aprender scrum
 
-This project is a starting point for a Flutter application.
+EL codigo de los modulos se puede observar en la carpeta lib/screens
 
-A few resources to get you started if this is your first Flutter project:
+#Aprende flutter
 
 - [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
 - [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
